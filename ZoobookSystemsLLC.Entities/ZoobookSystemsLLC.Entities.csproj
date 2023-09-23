@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZoobookSystemsLLC.Shared\ZoobookSystemsLLC.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

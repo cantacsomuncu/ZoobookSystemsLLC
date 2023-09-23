@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZoobookSystemsLLC.Data\ZoobookSystemsLLC.Data.csproj" />
+    <ProjectReference Include="..\ZoobookSystemsLLC.Entities\ZoobookSystemsLLC.Entities.csproj" />
+    <ProjectReference Include="..\ZoobookSystemsLLC.Shared\ZoobookSystemsLLC.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
