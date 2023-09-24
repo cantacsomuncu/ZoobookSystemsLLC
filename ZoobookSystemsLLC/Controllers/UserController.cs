@@ -25,24 +25,23 @@ namespace ZoobookSystemsLLC.Controllers
         public async Task<ActionResult> Login(UserLoginDto model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-                return Ok(0);
-            if (!await _userManager.CheckPasswordAsync(user, model.Password))
-                return Ok(0);
-
-            var userRoles = await _userManager.GetRolesAsync(user);
-            var authClaims = new List<Claim>
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                var userRoles = await _userManager.GetRolesAsync(user);
+                var authClaims = new List<Claim>
             {
                new Claim(ClaimTypes.Email, user.Email),
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
-            foreach (var userRole in userRoles)
-            {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+                string jwt = _jWTManager.GenerateToken(authClaims);
+                return Ok(new { token = jwt, email = user.Email, userId = user.Id });
             }
-            string jwt = _jWTManager.GenerateToken(authClaims);
-            return Ok(jwt);
-        }       
+            return Ok(new { status = Unauthorized(), result = 0 });            
+        }
     }
 }
